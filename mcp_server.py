@@ -58,7 +58,13 @@ try:
 except Exception:
     pass
 
-import gateway  # noqa: E402
+import gateway
+
+try:
+    from trigger_detector import detect_triggers, auto_context
+    _TRIGGER_OK = True
+except ImportError:
+    _TRIGGER_OK = False  # noqa: E402
 _IMPORT_SECS = time.time() - _T_IMPORT
 
 PROTOCOL = "2024-11-05"
@@ -608,6 +614,16 @@ def tool_add(args):
 def tool_search(args):
     q = args.get("query", "")
     lim = int(args.get("limit", 8))
+    
+    # Proactive Memory Recall: auto-detect entities and inject context
+    trigger_context = None
+    if _TRIGGER_OK:
+        try:
+            triggers = detect_triggers(q)
+            if triggers:
+                trigger_context = auto_context(triggers)
+        except Exception:
+            pass  # trigger failure should never block search
     degraded = False
     st = _warm_state()
     if st == "pending":
@@ -628,6 +644,9 @@ def tool_search(args):
         r = _quiet(gateway.search, q, limit=lim)
     if not r or not r.get("ok"):
         return _err("检索失败: %s" % (r or "unknown"))
+    if trigger_context:
+        r["auto_context"] = trigger_context
+        r["auto_triggered"] = True
     out = []
     for it in (r.get("results") or [])[:lim]:
         if isinstance(it, dict):
