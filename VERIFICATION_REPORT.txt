@@ -1,0 +1,46 @@
+============================================================
+MEMTETHER VERIFICATION REPORT
+Generated: 2026-10-11 11:13:05
+============================================================
+
+SECTION 1: PACKAGE
+
+CHECK: Import + version
+  PASS (0.1s)
+
+SECTION 2: CORE TESTS
+
+CHECK: Memory Court (hash chain/tamper/verify)
+  PASS (6.6s)
+    tests\test_memory_court.py .........                                     [100%]
+    ======================== 9 passed, 1 warning in 4.99s =========================
+
+CHECK: Poisoning defense (8 vectors)
+  PASS (8.1s)
+    tests\test_poisoning_defense.py ........                                 [100%]
+    ======================== 8 passed, 1 warning in 5.98s =========================
+
+CHECK: E2E integration (gate/supersede/verify)
+  PASS (4.8s)
+    tests\test_court_e2e_integration.py ...                                  [100%]
+    ======================== 3 passed, 1 warning in 3.34s =========================
+
+CHECK: Integrity (cycle/race/privacy)
+  PASS (4.4s)
+    tests\test_r6_integrity.py ....                                          [100%]
+    tests/test_r6_integrity.py::TestCycleRefusal::test_cycle_chain_grows_without_error
+    ======================== 4 passed, 1 warning in 2.92s =========================
+
+CHECK: Supersession+search
+  PASS (4.7s)
+    tests\test_consolidation.py .....                                        [100%]
+    ======================== 8 passed, 1 warning in 3.05s =========================
+
+SECTION 3: AUDIT DEMO
+
+CHECK: Audit chain demo (tamper -> FAIL)
+  PASS (4.4s)
+
+============================================================
+RESULT: 7 passed, 0 failed, 7 total
+============================================================
