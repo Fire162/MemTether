@@ -1,27 +1,21 @@
 ---
 name: Bug report
-about: Report a bug in MemTether
-title: '[Bug] '
+about: Report a problem with MemTether
 labels: bug
-assignees: ''
 ---
-
 **Describe the bug**
-A clear and concise description of what the bug is.
+A clear description of what happened.
 
-**To Reproduce**
-Steps to reproduce:
-1. Run `...`
-2. See error
+**To reproduce**
+Steps / commands you ran.
 
 **Expected behavior**
 What you expected to happen.
 
 **Environment**
-- OS: [e.g. Windows 11, Ubuntu 22.04]
-- Python version: [e.g. 3.10.12]
-- MemTether version: [e.g. 0.1.0a9]
-- Installation method: [pip / source / docker]
+- OS: [e.g. Windows 11]
+- Python: [e.g. 3.13]
+- memtether version: [e.g. 0.1.0a79 / pip show memtether]
 
 **Additional context**
-Any other context, logs, or screenshots.
+Any logs or screenshots.
