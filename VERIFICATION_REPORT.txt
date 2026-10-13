@@ -1,6 +1,6 @@
 ============================================================
 MEMTETHER VERIFICATION REPORT
-Generated: 2026-10-11 11:13:05
+Generated: 2026-10-13 16:55:54
 ============================================================
 
 SECTION 1: PACKAGE
@@ -11,35 +11,35 @@ CHECK: Import + version
 SECTION 2: CORE TESTS
 
 CHECK: Memory Court (hash chain/tamper/verify)
-  PASS (6.6s)
+  PASS (5.7s)
     tests\test_memory_court.py .........                                     [100%]
-    ======================== 9 passed, 1 warning in 4.99s =========================
+    ======================== 9 passed, 1 warning in 4.01s =========================
 
 CHECK: Poisoning defense (8 vectors)
-  PASS (8.1s)
+  PASS (5.8s)
     tests\test_poisoning_defense.py ........                                 [100%]
-    ======================== 8 passed, 1 warning in 5.98s =========================
+    ======================== 8 passed, 1 warning in 4.37s =========================
 
 CHECK: E2E integration (gate/supersede/verify)
-  PASS (4.8s)
+  PASS (3.7s)
     tests\test_court_e2e_integration.py ...                                  [100%]
-    ======================== 3 passed, 1 warning in 3.34s =========================
+    ======================== 3 passed, 1 warning in 2.61s =========================
 
 CHECK: Integrity (cycle/race/privacy)
-  PASS (4.4s)
+  PASS (3.5s)
     tests\test_r6_integrity.py ....                                          [100%]
     tests/test_r6_integrity.py::TestCycleRefusal::test_cycle_chain_grows_without_error
-    ======================== 4 passed, 1 warning in 2.92s =========================
+    ======================== 4 passed, 1 warning in 2.42s =========================
 
 CHECK: Supersession+search
-  PASS (4.7s)
+  PASS (3.4s)
     tests\test_consolidation.py .....                                        [100%]
-    ======================== 8 passed, 1 warning in 3.05s =========================
+    ======================== 8 passed, 1 warning in 2.29s =========================
 
 SECTION 3: AUDIT DEMO
 
 CHECK: Audit chain demo (tamper -> FAIL)
-  PASS (4.4s)
+  PASS (3.2s)
 
 ============================================================
 RESULT: 7 passed, 0 failed, 7 total
