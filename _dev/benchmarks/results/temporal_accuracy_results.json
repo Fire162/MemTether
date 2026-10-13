@@ -118,13 +118,13 @@
     },
     {
       "i": 11,
-      "old": "【技能】2022- 4096 E://Temp//HD_X.dat HD_X HD_X.exe IDMan=E:// R",
-      "new": "【技能】2022- 4096 E://Temp//HD_X.dat HD_X HD_X.exe IDMan=E:// R",
+      "old": "【技能】2022- 4096 E://Temp//SAMPLE_MALWARE.dat SAMPLE_MALWARE SAMPLE_MALWARE.exe IDMan=E:// R",
+      "new": "【技能】2022- 4096 E://Temp//SAMPLE_MALWARE.dat SAMPLE_MALWARE SAMPLE_MALWARE.exe IDMan=E:// R",
       "mt_past": true,
       "mt_now": true,
       "mem0_past": true,
       "mem0_now": true,
-      "mem0_current": "【技能】2022- 4096 E://Temp//HD_X.dat HD_X HD_X.exe IDMan=E:// R"
+      "mem0_current": "【技能】2022- 4096 E://Temp//SAMPLE_MALWARE.dat SAMPLE_MALWARE SAMPLE_MALWARE.exe IDMan=E:// R"
     },
     {
       "i": 12,
