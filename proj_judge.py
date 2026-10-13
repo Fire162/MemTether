@@ -37,6 +37,7 @@ def gate(name, cmd, timeout=600):
 gate('pytest', [PY, '-m', 'pytest', 'tests/', '-q'])
 gate('make_jury', [PY, 'make_jury.py'])
 gate('check_packaging', [PY, 'scripts/check_packaging.py'])
+gate('ruff', [PY, '-m', 'ruff', 'check', '.', '--select', 'E9,F63,F7,F82', '--ignore', 'E501'])
 
 # leak scan (repo working tree) — must point at the real wordlist, else silent false-green
 _env = dict(os.environ)
@@ -46,6 +47,7 @@ import subprocess as _sp
 _r = _sp.run([PY, 'scripts/scan_leaks.py'], cwd=REPO, capture_output=True, timeout=180,
              env=_env, encoding='utf-8', errors='replace')
 leak_rc = _r.returncode
+leak_out = _r.stdout or ''
 l1.append(('scan_leaks', leak_rc in (0,), leak_rc, leak_out[-200:] if leak_rc else ''))
 print(f'[L1] scan_leaks: {"PASS" if leak_rc==0 else "rc=%d"%leak_rc}')
 
@@ -101,6 +103,18 @@ wf_ok = os.path.exists(os.path.join(REPO, '.github/workflows/ci.yml'))
 sc_ok = os.path.exists(os.path.join(REPO, '.github/workflows/scorecard.yml'))
 docs_ok = all(os.path.exists(os.path.join(REPO, f)) for f in ('README.md','ARCHITECTURE.md','SECURITY.md','INSTALL.md'))
 D = (5 if wf_ok else 0) + (3 if sc_ok else 0) + (5 if docs_ok else 0) + (2 if os.path.exists(os.path.join(REPO,'CHANGELOG.md')) else 0)
+# GitHub Community Standards health (official API, live)
+try:
+    import urllib.request as _u, json as _j
+    _req = _u.Request('https://api.github.com/repos/MemTether/MemTether/community/profile',
+                      headers={'User-Agent':'proj-judge','Accept':'application/vnd.github+json'})
+    _d = _j.loads(_u.urlopen(_req, timeout=30).read())
+    _hp = int(_d.get('health_percentage', 0))
+    D += (5 if _hp >= 90 else 3 if _hp >= 70 else 1 if _hp >= 50 else 0)
+    detail_d.append(f'community_health={_hp}%')
+except Exception:
+    detail_d.append('community_health=API failed')
+D = min(15, D)
 detail_d.append(f'ci={wf_ok} scorecard={sc_ok} docs={docs_ok} → D={D}')
 
 total = A + B + C + D
