@@ -670,6 +670,9 @@ def tool_search(args):
     except Exception:
         pass
     payload = {"engine": r.get("engine"), "count": len(out), "results": out}
+    if r.get("auto_triggered"):
+        payload["auto_context"] = r.get("auto_context")
+        payload["auto_triggered"] = True
     if degraded:
         payload["degraded"] = True
         payload["note"] = ("向量索引正在预热（冷启动约 30 秒），本次为关键词检索、可能漏召回；"
